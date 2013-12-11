@@ -2,14 +2,14 @@
  * Copyright 2005 Ryan Bloom
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package net.rkbloom.logdriver;
@@ -56,7 +56,7 @@ public class LogCallableStatement implements CallableStatement {
     private Map<Object, Object> bindParams;
     private Map<Object, Object> outParams;
     private static Logger log = Logger.getLogger(LogCallableStatement.class);
-    
+
     public LogCallableStatement(CallableStatement cs, Connection c, String s) {
         embedded = cs;
         conn = c;
@@ -67,7 +67,7 @@ public class LogCallableStatement implements CallableStatement {
         bindParams = new TreeMap<Object, Object>();
         outParams = new TreeMap<Object, Object>();
     }
-    
+
     // This looks useless, but it isn't.  I have centralized the logging in
     // this class so that I can easily replace all of the '?'s with the actual
     // values.
@@ -77,22 +77,22 @@ public class LogCallableStatement implements CallableStatement {
 
     private void logStatement(String sql) {
         String replaceBind = System.getProperty("replace.bindParams", "0");
-        
+
         if (replaceBind.equals("1") || replaceBind.equals("true")) {
             String logStr = sql;
             int i = 1;
             while (logStr.indexOf('?') >= 0) {
-                logStr = logStr.replaceFirst("\\?", 
+                logStr = logStr.replaceFirst("\\?",
                                     bindParams.get(new Integer(i++)).toString());
             }
-            log.debug("executing CallableStatement: " + logStr);
+            log.debug("executing CallableStatement: " logStr);
             return;
         }
-        
-        log.debug("executing CallableStatement: '" + sql + "' with bind " +
-                  "parameters: " + bindParams + " out parameters: " + outParams);    
+
+        log.debug("executing CallableStatement: '" sql "' with bind "
+                  "parameters: " bindParams " out parameters: " outParams);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -1127,7 +1127,7 @@ public class LogCallableStatement implements CallableStatement {
      * {@inheritDoc}
      */
     public String getString(String name) throws SQLException {
-        return embedded.getString(name);        
+        return embedded.getString(name);
     }
 
     /**
@@ -1279,7 +1279,7 @@ public class LogCallableStatement implements CallableStatement {
     public URL getURL(String name) throws SQLException {
         return embedded.getURL(name);
     }
-    
+
     /**
      * Represents the meta information about a Out parameter.
      * OutParamMetadata
@@ -1291,7 +1291,7 @@ public class LogCallableStatement implements CallableStatement {
         private String typeName;
         public static final int NO_SCALE = -1;
         public static final String NONE = "NONE";
-        
+
         /**
          * Default contructor
          * @param t the SQL type code defined by <code>java.sql.Types</code>.
@@ -1304,7 +1304,7 @@ public class LogCallableStatement implements CallableStatement {
             scale = s;
             typeName = tName;
         }
-        
+
         /**
          * Constructs metadata with a Typename
          * @param t the SQL type code defined by <code>java.sql.Types</code>.
@@ -1314,7 +1314,7 @@ public class LogCallableStatement implements CallableStatement {
             this(t, NO_SCALE, tName);
         }
 
-        
+
         /**
          * Constructs metadata with a Typename
          * @param t the SQL type code defined by <code>java.sql.Types</code>.
@@ -1338,24 +1338,24 @@ public class LogCallableStatement implements CallableStatement {
         public int getScale() {
             return scale;
         }
-        
+
         /**
          * @return Returns the type.
          */
         public int getType() {
             return type;
         }
-     
+
         /**
          * @return Returns the typeName.
          */
         public String getTypeName() {
             return typeName;
         }
-        
+
         public String toString() {
-            return "type: " + TypeConverter.convert(type) + " scale: " + scale +
-                   " type name: " + typeName;
+            return "type: " TypeConverter.convert(type) " scale: " scale
+                   " type name: " typeName;
         }
     }
 

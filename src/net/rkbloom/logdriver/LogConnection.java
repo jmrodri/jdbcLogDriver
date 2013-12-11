@@ -2,14 +2,14 @@
  * Copyright 2005 Ryan Bloom
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package net.rkbloom.logdriver;
@@ -46,12 +46,12 @@ public class LogConnection implements Connection {
 
     private Connection embedded;
     private static Logger log = Logger.getLogger(LogConnection.class);
-    
+
     LogConnection(Connection conn) {
         embedded = conn;
-        log.debug("Opening connection: " + embedded);
+        log.debug("Opening connection: " embedded);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -77,7 +77,7 @@ public class LogConnection implements Connection {
      * {@inheritDoc}
      */
     public void close() throws SQLException {
-        log.debug("Closing connection: " + embedded);
+        log.debug("Closing connection: " embedded);
         embedded.close();
     }
 
@@ -85,7 +85,7 @@ public class LogConnection implements Connection {
      * {@inheritDoc}
      */
     public void commit() throws SQLException {
-        log.debug("Committing connection: " + embedded);
+        log.debug("Committing connection: " embedded);
         embedded.commit();
     }
 
@@ -93,7 +93,7 @@ public class LogConnection implements Connection {
      * {@inheritDoc}
      */
     public void rollback() throws SQLException {
-        log.debug("Rolling back connection: " + embedded);
+        log.debug("Rolling back connection: " embedded);
         embedded.rollback();
     }
 
@@ -209,7 +209,7 @@ public class LogConnection implements Connection {
     public Statement createStatement(int resultSetType, int resultSetConcurrency)
         throws SQLException {
         log.debug("Creating a new statement");
-        return new LogStatement(embedded.createStatement(resultSetType, 
+        return new LogStatement(embedded.createStatement(resultSetType,
                                                          resultSetConcurrency),
                                 this);
     }
@@ -221,7 +221,7 @@ public class LogConnection implements Connection {
             int resultSetConcurrency, int resultSetHoldability)
         throws SQLException {
         log.debug("Creating a new statement");
-        return new LogStatement(embedded.createStatement(resultSetType, 
+        return new LogStatement(embedded.createStatement(resultSetType,
                                         resultSetConcurrency,
                                         resultSetHoldability),
                                 this);
@@ -292,7 +292,7 @@ public class LogConnection implements Connection {
      */
     public PreparedStatement prepareStatement(String sql, int resultSetType,
             int resultSetConcurrency) throws SQLException {
-        return new LogPreparedStatement(embedded.prepareStatement(sql, resultSetType, 
+        return new LogPreparedStatement(embedded.prepareStatement(sql, resultSetType,
                                          resultSetConcurrency), this, sql);
     }
 
@@ -302,8 +302,8 @@ public class LogConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, int resultSetType,
             int resultSetConcurrency, int resultSetHoldability)
         throws SQLException {
-        return new LogPreparedStatement(embedded.prepareStatement(sql, 
-                                        resultSetType, resultSetConcurrency, 
+        return new LogPreparedStatement(embedded.prepareStatement(sql,
+                                        resultSetType, resultSetConcurrency,
                                         resultSetHoldability), this, sql);
     }
 
@@ -312,7 +312,7 @@ public class LogConnection implements Connection {
      */
     public PreparedStatement prepareStatement(String sql, int[] columnIndexes)
         throws SQLException {
-        return new LogPreparedStatement(embedded.prepareStatement(sql, 
+        return new LogPreparedStatement(embedded.prepareStatement(sql,
                                         columnIndexes), this, sql);
     }
 
@@ -328,7 +328,7 @@ public class LogConnection implements Connection {
      */
     public PreparedStatement prepareStatement(String sql, String[] columnNames)
         throws SQLException {
-        return new LogPreparedStatement(embedded.prepareStatement(sql, 
+        return new LogPreparedStatement(embedded.prepareStatement(sql,
                                         columnNames), this, sql);
     }
 

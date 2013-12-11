@@ -31,64 +31,64 @@ import javax.sql.DataSource;
  * @version $Rev$
  */
 public class LogDataSource implements DataSource {
-	/** The logger. */
-	private static Logger logger = Logger.getLogger(LogDataSource.class);
+    /** The logger. */
+    private static Logger logger = Logger.getLogger(LogDataSource.class);
 
-	/** The data source to delegate to. */
-	private DataSource dataSource;
+    /** The data source to delegate to. */
+    private DataSource dataSource;
 
-	/**
-	 * Creates a new instance of the LogDataSource class.
-	 *
-	 * @param ds the data source to delegate to.
-	 */
-	public LogDataSource(DataSource ds) {
-		dataSource = ds;
-	}
+    /**
+     * Creates a new instance of the LogDataSource class.
+     *
+     * @param ds the data source to delegate to.
+     */
+    public LogDataSource(DataSource ds) {
+        dataSource = ds;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public Connection getConnection() throws SQLException {
-		return new LogConnection(dataSource.getConnection());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public Connection getConnection() throws SQLException {
+        return new LogConnection(dataSource.getConnection());
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public Connection getConnection(String username, String password) throws SQLException {
-		return new LogConnection(dataSource.getConnection(username, password));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public Connection getConnection(String username, String password) throws SQLException {
+        return new LogConnection(dataSource.getConnection(username, password));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public int getLoginTimeout() throws SQLException {
-		return dataSource.getLoginTimeout();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public int getLoginTimeout() throws SQLException {
+        return dataSource.getLoginTimeout();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setLoginTimeout(int seconds) throws SQLException {
-		logger.debug("Setting login timeout to " + seconds + " seconds");
-		dataSource.setLoginTimeout(seconds);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void setLoginTimeout(int seconds) throws SQLException {
+        logger.debug("Setting login timeout to " + seconds + " seconds");
+        dataSource.setLoginTimeout(seconds);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public PrintWriter getLogWriter() throws SQLException {
-		return dataSource.getLogWriter();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public PrintWriter getLogWriter() throws SQLException {
+        return dataSource.getLogWriter();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setLogWriter(PrintWriter out) throws SQLException {
-		logger.debug("Setting log writer to " + out);
-		dataSource.setLogWriter(out);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void setLogWriter(PrintWriter out) throws SQLException {
+        logger.debug("Setting log writer to " + out);
+        dataSource.setLogWriter(out);
+    }
 
     public java.util.logging.Logger getParentLogger()
         throws SQLFeatureNotSupportedException {
