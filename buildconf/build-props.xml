@@ -10,8 +10,11 @@
   <property name="build.instrument.dir" location="${build.dir}/instrumented" />
   <property name="log4j.threshold" value="warn" />
   <property name="halt-tests-on-failure" value="false" />
+  <property name="javadoc.lazy" value="false" />
   <property name="checkstyle.header.file" 
     value="${jld-home}/buildconf/LICENSE.txt" />
+  <property name="checkstyle.cache.src" value="${jld-home}/build/checkstyle.cache.src" />
+  <property name="checkstyle.cache.test" value="${jld-home}/build/checkstyle.cache.test" />
   <property name="lib.dir" value="${jld-home}/build/run-lib" />
   <property name="jar.file" value="${lib.dir}/logdriver.jar">
   </property>
@@ -25,6 +28,7 @@
   <path id="alljars">
     <fileset dir="lib">
       <include name="log4j*.jar" />
+      <include name="checkstyle*.jar" />
     </fileset>
   </path>
   <path id="testjars">

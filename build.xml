@@ -9,6 +9,8 @@
 
   <target name="init">
     <tstamp />
+    <taskdef resource="checkstyletask.properties"
+             classpathref="alljars" />
   </target>
 
   <target name="clean" description="clean all of the code">
@@ -63,6 +65,7 @@
       <property key="javadoc.type.scope" value="package" />
       <property key="javadoc.var.scope" value="package" />
       <property key="javadoc.lazy" value="${javadoc.lazy}" />
+      <property key="javadoc.missing.param" value="true" />
       <property key="checkstyle.cache.file" value="${checkstyle.cache.src}" />
       <fileset dir="src" >
         <include name="**/*.java" />
@@ -70,7 +73,7 @@
         <exclude name="**/playpen/*.java" />
       </fileset>
       <classpath>
-          <path refid="buildjars" />
+          <path refid="alljars" />
           <pathelement path="${build.dir}/classes" />
       </classpath>
       <formatter type="plain" />
